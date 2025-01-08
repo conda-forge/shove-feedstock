@@ -10,20 +10,22 @@ source:
   sha256: f1c643b5c68f45ad3a3fb6f39aa7f1a9221d0c387a135df06123990f83a734ec
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv"
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
-    - python
+    - python >={{ python_min }}
     - setuptools
     - stuf >=0.9.14
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - shove
 
